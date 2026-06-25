@@ -1,3 +1,9 @@
+<?php
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
+$v = time();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -533,7 +539,7 @@
   </header>
 
   <main class="wrapper page-pad">
-    <img class="hero-img" src="img/photo_2026-06-20_15-06-52.jpg" alt="Banner promocional">
+    <img class="hero-img" src="img/photo_2026-06-20_15-06-52.jpg?v=<?php echo $v; ?>" alt="Banner promocional">
 
     <section class="card">
        <div class="content">
@@ -572,7 +578,7 @@
         </div>
 
         <div class="car-area">
-          <img src="img/IMG_3385.PNG" alt="Auto Banpro" style="width:95%; max-width:299px; display:block;">
+          <img src="img/IMG_3385.PNG?v=<?php echo $v; ?>" alt="Auto Banpro" style="width:95%; max-width:299px; display:block;">
         </div>
 <br>      <div class="bottom">
           <h2>Los ganadores serán anunciados a través de nuestros canales oficiales.</h2>
