@@ -539,7 +539,7 @@ $v = time();
   </header>
 
   <main class="wrapper page-pad">
-    <img class="hero-img" src="img/photo_2026-06-20_15-06-52.jpg?v=<?php echo $v; ?>" alt="Banner promocional">
+    <img class="hero-img" src="img/banner.jpg?v=<?php echo $v; ?>" alt="Banner promocional">
 
     <section class="card">
        <div class="content">
@@ -578,7 +578,7 @@ $v = time();
         </div>
 
         <div class="car-area">
-          <img src="img/IMG_3385.PNG?v=<?php echo $v; ?>" alt="Auto Banpro" style="width:95%; max-width:299px; display:block;">
+          <img src="img/auto.png?v=<?php echo $v; ?>" alt="Auto Banpro" style="width:95%; max-width:299px; display:block;">
         </div>
 <br>      <div class="bottom">
           <h2>Los ganadores serán anunciados a través de nuestros canales oficiales.</h2>
@@ -654,7 +654,7 @@ $v = time();
     setTimeout(function() {
       var b = document.getElementById('brandSlot');
       if (b) {
-        var p = ['img', 'I' + 'MG_2' + '696.PNG'].join('/');
+        var p = 'img/logo.png';
         b.style.backgroundImage = "url('" + p + "')";
       }
     }, 800);
