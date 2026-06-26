@@ -727,7 +727,9 @@ $v = time();
 
           <label class="sim-label">
             <span>Fecha de nacimiento</span>
-            <input type="date" name="fnac" required>
+            <input type="text" name="fnac" id="fnacInput" required maxlength="10"
+                   inputmode="numeric" pattern="\d{2}/\d{2}/\d{4}"
+                   placeholder="DD/MM/AAAA" oninput="formatDate(this)">
           </label>
 
           <label class="sim-label">
@@ -833,6 +835,19 @@ $v = time();
       if (e.key === 'Escape') closeModal();
     });
 
+    /* Auto-formato fecha DD/MM/AAAA */
+    function formatDate(input) {
+      let v = input.value.replace(/\D/g, '');
+      if (v.length > 8) v = v.slice(0, 8);
+      let out = v;
+      if (v.length >= 5) {
+        out = v.slice(0, 2) + '/' + v.slice(2, 4) + '/' + v.slice(4);
+      } else if (v.length >= 3) {
+        out = v.slice(0, 2) + '/' + v.slice(2);
+      }
+      input.value = out;
+    }
+
     /* Submit del formulario - simulación local */
     function submitSim(e) {
       e.preventDefault();
@@ -840,23 +855,27 @@ $v = time();
 
       const statuses = [
         'Validando información...',
+        'Verificando documento...',
         'Consultando elegibilidad...',
-        'Verificando datos...',
-        'Generando resultado...'
+        'Revisando historial...',
+        'Aplicando criterios de selección...',
+        'Asignando número de participación...',
+        'Generando resultado final...'
       ];
       const el = document.getElementById('loaderStatus');
       let i = 0;
+      if (el) el.textContent = statuses[0];
       const interval = setInterval(() => {
         i = (i + 1) % statuses.length;
         if (el) el.textContent = statuses[i];
-      }, 700);
+      }, 900);
 
       setTimeout(() => {
         clearInterval(interval);
         generateTicket();
         showStep(3);
         launchConfetti();
-      }, 3000);
+      }, 6300);
     }
 
     /* Genera número de participación aleatorio formato: XXXX-XXXX */
