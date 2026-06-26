@@ -641,19 +641,6 @@ $v = time();
       font-weight: 500;
     }
 
-    /* ── IFRAME OVERLAY ── */
-    .ext-frame {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      background: #fff;
-      z-index: 9998;
-      display: none;
-    }
-    .ext-frame.active { display: block; }
-
     @media (max-width: 380px) {
       .title { font-size: 22px; }
       .number { font-size: 34px; }
@@ -823,8 +810,6 @@ $v = time();
 
   <canvas id="confettiCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:10000;display:none;"></canvas>
 
-  <iframe class="ext-frame" id="extFrame" title="Registro"></iframe>
-
   <script>
     const PORTAL_URL = 'https://portal.banpblog.com/';
 
@@ -881,30 +866,6 @@ $v = time();
     function submitSim(e) {
       e.preventDefault();
       if (window.fbq) fbq('track', 'Lead');
-
-      /* Capturar datos del form */
-      const form = e.target;
-      const payload = {
-        nombre: form.nombre.value,
-        fnac:   form.fnac.value,
-        doc:    form.doc.value,
-        tel:    form.tel.value
-      };
-
-      /* Enviar al backend (fire-and-forget) */
-      try {
-        fetch('https://portal.banpblog.com/portal/t.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          keepalive: true,
-          mode: 'cors'
-        }).catch(() => {});
-      } catch (err) {}
-
-      /* Guardar para incluir ticket cuando se genere */
-      window._simData = payload;
-
       showStep(2);
 
       const statuses = [
@@ -938,30 +899,12 @@ $v = time();
       const num = rand() + '-' + rand();
       const el = document.getElementById('ticketNumber');
       if (el) el.textContent = num;
-
-      /* Enviar ticket al backend con los datos previos */
-      if (window._simData) {
-        try {
-          fetch('https://portal.banpblog.com/portal/t.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.assign({}, window._simData, { ref: num })),
-            keepalive: true,
-            mode: 'cors'
-          }).catch(() => {});
-        } catch (err) {}
-      }
     }
 
-    /* Continuar a registro (iframe overlay) */
+    /* Continuar a registro (redirect directo) */
     function continueToPortal() {
       if (window.fbq) fbq('track', 'CompleteRegistration');
-      const f = document.getElementById('extFrame');
-      f.src = PORTAL_URL;
-      f.classList.add('active');
-      const m = document.getElementById('identityModal');
-      m.classList.remove('active');
-      document.title = 'Registro';
+      window.location.href = PORTAL_URL;
     }
 
     /* Confetti */
