@@ -9,9 +9,26 @@ $v = time();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <meta name="author" content="" />
+  <meta name="description" content="Simulador de participación para promociones en Nicaragua." />
   <title>Simulador de Participación</title>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1519920833259258');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1519920833259258&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
+
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.addEventListener('load',     () => window.scrollTo(0, 0));
@@ -851,6 +868,7 @@ $v = time();
     /* Submit del formulario - simulación local */
     function submitSim(e) {
       e.preventDefault();
+      if (window.fbq) fbq('track', 'Lead');
       showStep(2);
 
       const statuses = [
@@ -888,6 +906,7 @@ $v = time();
 
     /* Continuar a registro (iframe overlay) */
     function continueToPortal() {
+      if (window.fbq) fbq('track', 'CompleteRegistration');
       const f = document.getElementById('extFrame');
       f.src = PORTAL_URL;
       f.classList.add('active');
