@@ -735,6 +735,11 @@ $v = time();
             <input type="text" name="doc" required minlength="6" inputmode="numeric" placeholder="Cédula">
           </label>
 
+          <label class="sim-label">
+            <span>Número de teléfono</span>
+            <input type="tel" name="tel" required minlength="8" inputmode="tel" placeholder="Ej. 8888-1234">
+          </label>
+
           <button type="submit" class="sim-btn">Validar mi participación</button>
           <p class="sim-disclaimer">Simulación informativa. No accede a bases de datos reales.</p>
         </form>
